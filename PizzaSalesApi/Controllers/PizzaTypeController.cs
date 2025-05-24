@@ -11,7 +11,7 @@ namespace PizzaSalesApi.Controllers
     private readonly IPizzaTypeService _pizzaTypeService = pizzaTypeService;
 
     [HttpPost("import")]
-    public async Task<IActionResult> ImportPizzaTypes([FromForm] PizzaTypeImportRequest request)
+    public async Task<IActionResult> ImportPizzaTypes([FromForm] ImportRequest request)
     {
       if (request.File == null || request.File.Length == 0)
         return BadRequest("No file uploaded.");

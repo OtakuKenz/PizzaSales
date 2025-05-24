@@ -10,7 +10,7 @@ namespace PizzaSalesApi.Services
   {
     private readonly PizzaSalesContext _context = context;
 
-    public async Task<ImportResultDto> ImportAsync(PizzaTypeImportRequest request)
+    public async Task<ImportResultDto> ImportAsync(ImportRequest request)
     {
       using var stream = request.File.OpenReadStream();
       using var reader = new StreamReader(stream);

@@ -12,6 +12,6 @@ namespace PizzaSalesApi.Services
     /// </summary>
     /// <param name="request">The import request containing the file and header mapping.</param>
     /// <returns>Import result with inserted and duplicate counts.</returns>
-    Task<ImportResultDto> ImportAsync(PizzaTypeImportRequest request);
+    Task<ImportResultDto> ImportAsync(ImportRequest request);
   }
 }
