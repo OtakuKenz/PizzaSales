@@ -5,5 +5,6 @@
     accept=".csv"
     id="csvFile"
   ></app-file-input>
-  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Upload</button>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid" *ngIf="!isSaving">Upload</button>
+  <app-loading-button *ngIf="isSaving"></app-loading-button>
 </form>

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaSalesApi.Models.Entities;
 
@@ -10,9 +11,11 @@ using PizzaSalesApi.Models.Entities;
 namespace PizzaSalesApi.Migrations
 {
     [DbContext(typeof(PizzaSalesContext))]
-    partial class PizzaSalesContextModelSnapshot : ModelSnapshot
+    [Migration("20250524195333_AddedPizzaTypeReferences")]
+    partial class AddedPizzaTypeReferences
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");

@@ -16,13 +16,20 @@ namespace PizzaSalesApi.Models.Entities
     [JsonPropertyName("pizza_type_id")]
     public string PizzaTypeId { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Name of the pizza type.
+    /// </summary>
     [Required]
     public string Name { get; set; } = string.Empty;
 
-    [Required]
-    public string Category { get; set; } = string.Empty;
+    /// <summary>
+    /// Collection of ingredients associated with the pizza type.
+    /// </summary>
+    public virtual ICollection<PizzaTypeIngredient> PizzaTypeIngredients { get; set; } = [];
 
-    [Required]
-    public string Ingredients { get; set; } = string.Empty;
+    /// <summary>
+    /// Collection of categories associated with the pizza type.
+    /// </summary>
+    public virtual ICollection<PizzaTypeCategory> PizzaTypeCategories { get; set; } = [];
   }
 }

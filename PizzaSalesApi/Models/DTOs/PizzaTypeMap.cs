@@ -1,13 +1,11 @@
-using System;
 using CsvHelper.Configuration;
-using PizzaSalesApi.Models.Entities;
 
 namespace PizzaSalesApi.Models.DTOs
 {
   /// <summary>
   /// Used to map CSV columns to PizzaType properties.
   /// </summary>
-  public class PizzaTypeMap : ClassMap<PizzaType>
+  public class PizzaTypeMap : ClassMap<PizzaTypeCsvDto>
   {
     public PizzaTypeMap()
     {

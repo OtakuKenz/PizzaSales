@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaSalesApi.Models.Entities;
 
@@ -10,9 +11,11 @@ using PizzaSalesApi.Models.Entities;
 namespace PizzaSalesApi.Migrations
 {
     [DbContext(typeof(PizzaSalesContext))]
-    partial class PizzaSalesContextModelSnapshot : ModelSnapshot
+    [Migration("20250524190736_normalizedPizzaType")]
+    partial class normalizedPizzaType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -216,7 +219,7 @@ namespace PizzaSalesApi.Migrations
                         .IsRequired();
 
                     b.HasOne("PizzaSalesApi.Models.Entities.PizzaType", "PizzaType")
-                        .WithMany("PizzaTypeCategories")
+                        .WithMany()
                         .HasForeignKey("PizzaTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -235,7 +238,7 @@ namespace PizzaSalesApi.Migrations
                         .IsRequired();
 
                     b.HasOne("PizzaSalesApi.Models.Entities.PizzaType", "PizzaType")
-                        .WithMany("PizzaTypeIngredients")
+                        .WithMany()
                         .HasForeignKey("PizzaTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -243,13 +246,6 @@ namespace PizzaSalesApi.Migrations
                     b.Navigation("Ingredient");
 
                     b.Navigation("PizzaType");
-                });
-
-            modelBuilder.Entity("PizzaSalesApi.Models.Entities.PizzaType", b =>
-                {
-                    b.Navigation("PizzaTypeCategories");
-
-                    b.Navigation("PizzaTypeIngredients");
                 });
 #pragma warning restore 612, 618
         }
