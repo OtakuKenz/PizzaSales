@@ -1,9 +1,7 @@
 using System;
 using PizzaSalesApi.Models.DTOs;
 
-namespace PizzaSalesApi.Services;
-
-public interface IPizzaService
+namespace PizzaSalesApi.Services
 {
   /// <summary>
   /// Service interface for pizza type operations.

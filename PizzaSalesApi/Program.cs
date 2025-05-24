@@ -16,6 +16,7 @@ builder.Services.AddDbContext<PizzaSalesContext>(options =>
 
 // Dependency injection for services
 builder.Services.AddScoped<IPizzaTypeService, PizzaTypeService>();
+builder.Services.AddScoped<IPizzaService, PizzaService>();
 
 var app = builder.Build();
 

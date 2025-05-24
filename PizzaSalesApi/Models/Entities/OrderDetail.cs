@@ -49,6 +49,6 @@ namespace PizzaSalesApi.Models.Entities
     /// <summary>
     /// Reference to <see cref="Models.Pizza"/>
     /// </summary>
-    public virtual Pizza Pizza { get; set; } = new();
+    public virtual Pizza? Pizza { get; set; } = new();
   }
 }

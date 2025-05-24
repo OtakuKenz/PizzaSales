@@ -37,6 +37,6 @@ namespace PizzaSalesApi.Models.Entities
     /// <summary>
     /// Reference to <see cref="Model.PizzaType"/> 
     /// </summary>
-    public virtual PizzaType PizzaType { get; set; } = new();
+    public virtual PizzaType? PizzaType { get; set; } = new();
   }
 }

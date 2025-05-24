@@ -10,7 +10,7 @@ namespace PizzaSalesApi.Services
     /// <summary>
     /// Imports pizza types from a CSV file using the provided import request.
     /// </summary>
-    /// <param name="request">The import request containing the file and header mapping.</param>
+    /// <param name="request">The import request containing the file.</param>
     /// <returns>Import result with inserted and duplicate counts.</returns>
     Task<ImportResultDto> ImportAsync(ImportRequest request);
   }

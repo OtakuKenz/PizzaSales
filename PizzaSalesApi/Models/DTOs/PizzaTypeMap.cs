@@ -2,18 +2,19 @@ using System;
 using CsvHelper.Configuration;
 using PizzaSalesApi.Models.Entities;
 
-namespace PizzaSalesApi.Models.DTOs;
-
-/// <summary>
-/// Used to map CSV columns to PizzaType properties.
-/// </summary>
-public class PizzaTypeMap : ClassMap<PizzaType>
+namespace PizzaSalesApi.Models.DTOs
 {
-  public PizzaTypeMap()
+  /// <summary>
+  /// Used to map CSV columns to PizzaType properties.
+  /// </summary>
+  public class PizzaTypeMap : ClassMap<PizzaType>
   {
-    Map(m => m.PizzaTypeId).Name("pizza_type_id");
-    Map(m => m.Name).Name("name");
-    Map(m => m.Category).Name("category");
-    Map(m => m.Ingredients).Name("ingredients");
+    public PizzaTypeMap()
+    {
+      Map(m => m.PizzaTypeId).Name("pizza_type_id");
+      Map(m => m.Name).Name("name");
+      Map(m => m.Category).Name("category");
+      Map(m => m.Ingredients).Name("ingredients");
+    }
   }
 }
