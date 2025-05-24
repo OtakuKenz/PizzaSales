@@ -1,0 +1,9 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <app-file-input
+    formControlName="csvFile"
+    label="Import Pizza - CSV File"
+    accept=".csv"
+    id="csvFile"
+  ></app-file-input>
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Upload</button>
+</form>

@@ -1,0 +1,20 @@
+<div class="main-container m-3">
+  <h1>Imports</h1>
+  <h4>This section allows you to import data from CSV files.</h4>
+  <span>
+    Make sure to import following this sequence:
+    <ul class="nav nav-pills flex-column import-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/imports/pizza-types" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">1. Pizza Types</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/imports/pizzas" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">2. Pizzas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/imports/orders" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">3. Orders</a>
+      </li>
+    </ul>
+  </span>
+  <hr>
+  <router-outlet></router-outlet>
+</div>

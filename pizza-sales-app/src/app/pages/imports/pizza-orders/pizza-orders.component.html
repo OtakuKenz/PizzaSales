@@ -1,0 +1,15 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <app-file-input
+    formControlName="orderCSV"
+    label="Import Order - CSV File"
+    accept=".csv"
+    id="orderCSV"
+  ></app-file-input>
+  <app-file-input
+    formControlName="orderDetailCSV"
+    label="Import Order Details - CSV File"
+    accept=".csv"
+    id="orderDetailCSV"
+  ></app-file-input>
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Upload</button>
+</form>

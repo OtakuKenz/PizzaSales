@@ -1,11 +1,2 @@
 # Mac desktop service store files
 .DS_Store
-
-# Build results
-[Dd]ebug/
-[Rr]elease/
-x64/
-[Bb]in/
-[Oo]bj/
-PizzaSalesApi/pizzasales.db-shm
-PizzaSalesApi/pizzasales.db-wal
