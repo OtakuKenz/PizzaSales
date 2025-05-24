@@ -1,0 +1,10 @@
+div.main-container {
+  max-height: calc(100vh - 56px);
+  overflow: auto;
+}
+
+.import-nav {
+  max-width: 10em;
+  margin-left: 1em;
+  margin-top: 0.5em;
+}

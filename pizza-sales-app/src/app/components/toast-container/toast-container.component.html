@@ -1,0 +1,13 @@
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  @for (toast of toastService.toasts; track toast) {
+    <ngb-toast [class]="toast.classname" [autohide]="true" [delay]="toast.delay || 5000"
+      (hidden)="toastService.remove(toast)">
+      <ng-container *ngIf="toast.template; else stringContent">
+        <ng-template [ngTemplateOutlet]="toast.template"></ng-template>
+      </ng-container>
+      <ng-template #stringContent>
+        <span [innerHTML]="toast.message"></span>
+      </ng-template>
+    </ngb-toast>
+  }
+</div>
