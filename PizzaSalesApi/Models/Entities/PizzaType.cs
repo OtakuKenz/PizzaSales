@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace PizzaSalesApi.Models
+namespace PizzaSalesApi.Models.Entities
 {
   /// <summary>
   /// Represents the type of pizza.

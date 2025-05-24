@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace PizzaSalesApi.Models
+namespace PizzaSalesApi.Models.Entities
 {
   public class PizzaSalesContext(DbContextOptions<PizzaSalesContext> options) : DbContext(options)
   {

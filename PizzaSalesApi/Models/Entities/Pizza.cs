@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace PizzaSalesApi.Models
+namespace PizzaSalesApi.Models.Entities
 {
   /// <summary>
   /// Represents the pizza entity.
@@ -37,6 +37,6 @@ namespace PizzaSalesApi.Models
     /// <summary>
     /// Reference to <see cref="Model.PizzaType"/> 
     /// </summary>
-    public virtual PizzaType PizzaType { get; set; } = new();
+    public virtual PizzaType? PizzaType { get; set; } = new();
   }
 }

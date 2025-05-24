@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using PizzaSalesApi.Models;
+using PizzaSalesApi.Models.Entities;
+using PizzaSalesApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PizzaSalesContext>(options =>
     options.UseSqlite("Data Source=pizzasales.db"));
+
+// Dependency injection for services
+builder.Services.AddScoped<IPizzaTypeService, PizzaTypeService>();
+builder.Services.AddScoped<IPizzaService, PizzaService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderDetailsService, OrderDetailsService>();
 
 var app = builder.Build();
 

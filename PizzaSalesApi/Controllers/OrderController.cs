@@ -1,102 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PizzaSalesApi.Models;
+using PizzaSalesApi.Models.DTOs;
+using PizzaSalesApi.Models.Entities;
+using PizzaSalesApi.Services;
 
 namespace PizzaSalesApi.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class OrderController : ControllerBase
+  public class OrderController(IOrderService orderService) : ControllerBase
   {
-    private readonly PizzaSalesContext _context;
+    private readonly IOrderService _orderService = orderService;
 
-    public OrderController(PizzaSalesContext context)
+    [HttpPost("import")]
+    public async Task<IActionResult> ImportOrders([FromForm] ImportRequest request)
     {
-      _context = context;
-    }
+      if (request.File == null || request.File.Length == 0)
+        return BadRequest("No file uploaded.");
 
-    // GET: api/Order
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
-    {
-      return await _context.Orders.ToListAsync();
-    }
-
-    // GET: api/Order/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Order>> GetOrder(int id)
-    {
-      var order = await _context.Orders.FindAsync(id);
-
-      if (order == null)
-      {
-        return NotFound();
-      }
-
-      return order;
-    }
-
-    // PUT: api/Order/5
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutOrder(int id, Order order)
-    {
-      if (id != order.OrderId)
-      {
-        return BadRequest();
-      }
-
-      _context.Entry(order).State = EntityState.Modified;
-
-      try
-      {
-        await _context.SaveChangesAsync();
-      }
-      catch (DbUpdateConcurrencyException)
-      {
-        if (!OrderExists(id))
-        {
-          return NotFound();
-        }
-        else
-        {
-          throw;
-        }
-      }
-
-      return NoContent();
-    }
-
-    // POST: api/Order
-    // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [HttpPost]
-    public async Task<ActionResult<Order>> PostOrder(Order order)
-    {
-      _context.Orders.Add(order);
-      await _context.SaveChangesAsync();
-
-      return CreatedAtAction("GetOrder", new { id = order.OrderId }, order);
-    }
-
-    // DELETE: api/Order/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteOrder(int id)
-    {
-      var order = await _context.Orders.FindAsync(id);
-      if (order == null)
-      {
-        return NotFound();
-      }
-
-      _context.Orders.Remove(order);
-      await _context.SaveChangesAsync();
-
-      return NoContent();
-    }
-
-    private bool OrderExists(int id)
-    {
-      return _context.Orders.Any(e => e.OrderId == id);
+      var result = await _orderService.ImportAsync(request);
+      return Ok(result);
     }
   }
 }
