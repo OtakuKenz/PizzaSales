@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PizzaSalesApi.Models;
+using PizzaSalesApi.Models.Entities;
 
 namespace PizzaSalesApi.Controllers
 {
