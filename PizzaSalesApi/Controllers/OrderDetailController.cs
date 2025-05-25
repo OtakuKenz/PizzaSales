@@ -19,5 +19,26 @@ namespace PizzaSalesApi.Controllers
       var result = await _orderDetailsService.ImportAsync(request);
       return Ok(result);
     }
+
+    [HttpGet("{orderId}")]
+    public async Task<IActionResult> GetOrderDetails(int orderId)
+    {
+      if (orderId <= 0)
+        return BadRequest("Invalid order ID.");
+
+      try
+      {
+        var orderDetails = await _orderDetailsService.GetOrderDetailsAsync(orderId);
+        return Ok(orderDetails);
+      }
+      catch (ArgumentException ex)
+      {
+        return NotFound(ex.Message);
+      }
+      catch (Exception ex)
+      {
+        return StatusCode(500, $"Internal server error: {ex.Message}");
+      }
+    }
   }
 }

@@ -1,0 +1,11 @@
+th{
+  cursor: pointer;
+}
+
+th.text-primary {
+  -webkit-user-select: none;
+  user-select: none;
+}
+th.text-primary:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,14 @@
+<div class="d-flex main-container">
+  <nav class="flex-shrink-0 p-3 bg-light border-end">
+    <ul class="nav nav-pills flex-column import-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/orders/search" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          Search Orders
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="flex-grow-1 p-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>

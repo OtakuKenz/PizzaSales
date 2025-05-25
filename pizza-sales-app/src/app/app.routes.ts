@@ -23,5 +23,19 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/imports/pizza-types/pizza-types.component').then(m => m.PizzaTypesComponent)
       }
     ]
+  },
+  {
+    path: 'orders',
+    loadComponent: () => import('./pages/orders/orders.component').then(m => m.OrdersComponent),
+    children: [
+      {
+        path: 'search',
+        loadComponent: () => import('./pages/orders/search/search.component').then(m => m.SearchComponent)
+      },
+      {
+        path: 'detail/:id', 
+        loadComponent: () => import('./pages/orders/detail/detail.component').then(m => m.DetailComponent)
+      }
+    ]
   }
 ];

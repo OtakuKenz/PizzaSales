@@ -11,16 +11,6 @@ namespace PizzaSalesApi.Services
   {
     private readonly PizzaSalesContext _context = context;
 
-    public Task<List<PizzaType>> GetAllAsync()
-    {
-      return _context.PizzaTypes
-        .Include(pt => pt.PizzaTypeIngredients)
-        .ThenInclude(pti => pti.Ingredient)
-        .Include(pt => pt.PizzaTypeCategories)
-        .ThenInclude(ptc => ptc.Category)
-        .ToListAsync();
-    }
-
     public async Task<ImportResultDto> ImportAsync(ImportRequest request)
     {
       using var stream = request.File.OpenReadStream();

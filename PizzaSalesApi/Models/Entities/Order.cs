@@ -29,5 +29,10 @@ namespace PizzaSalesApi.Models.Entities
     /// </summary>
     [Required]
     public TimeOnly Time { get; set; }
+
+    /// <summary>
+    /// Reference to order details.
+    /// </summary>
+    public virtual ICollection<OrderDetail> OrderDetails { get; set; } = [];
   }
 }
