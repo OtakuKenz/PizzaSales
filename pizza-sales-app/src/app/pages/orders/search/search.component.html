@@ -34,7 +34,7 @@
     </div>
   </form>
 </div>
-<div class="container-fluid">
+<div class="container-fluid mt-5">
   <app-datatable [columns]="columns" [data]="orders" [totalRecords]="totalOrders" [page]="orderSearch.pageNumber || 1"
     [pageSize]="orderSearch.pageSize || 10" [loading]="loading" (pageChange)="onPageChange($event)"
     (sortChange)="onSortChange($event)">

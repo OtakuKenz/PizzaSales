@@ -15,10 +15,5 @@ namespace PizzaSalesApi.Services
     /// <returns>Import result with inserted and duplicate counts.</returns>
     Task<ImportResultDto> ImportAsync(ImportRequest request);
 
-    /// <summary>
-    /// Retrieves all pizza types from the database.
-    /// </summary>
-    /// <returns></returns>
-    Task<List<PizzaType>> GetAllAsync();
   }
 }

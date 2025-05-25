@@ -19,12 +19,5 @@ namespace PizzaSalesApi.Controllers
       var result = await _pizzaTypeService.ImportAsync(request);
       return Ok(result);
     }
-
-    [HttpGet]
-    public async Task<IActionResult> GetAllPizzaTypes()
-    {
-      var pizzaTypes = await _pizzaTypeService.GetAllAsync();
-      return Ok(pizzaTypes);
-    }
   }
 }

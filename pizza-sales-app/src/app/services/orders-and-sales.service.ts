@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { SearchParam as searchQuery } from '../models/orders/search-param.model';
 import { PaginatedResponse } from '../models/orders/paginated-response.model';
 import { OrderDetail } from '../models/orders/order-detail.model';
+import { TopPizza } from '../models/home/top-pizza.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class OrdersAndSalesService {
   constructor(private http: HttpClient) { }
 
   getTotalSales(){
-    throw new Error('Method not implemented.');
+    return this.http.get<number>(`${this.apiRoot}/Pizza/total-sales`);
   }
 
   getOrders(searchQuery: searchQuery) {
@@ -42,4 +43,9 @@ export class OrdersAndSalesService {
   getOrder(orderId: string) {
     return this.http.get<OrderDetail>(`${this.apiRoot}/OrderDetail/${orderId}`);
   }
+
+  getTopPizzas() {
+    return this.http.get<TopPizza[]>(`${this.apiRoot}/Pizza/sales-report`);
+  }
+
 }
