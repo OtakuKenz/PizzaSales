@@ -21,5 +21,15 @@ namespace PizzaSalesApi.Controllers
       var result = await _orderService.ImportAsync(request);
       return Ok(result);
     }
+    
+    [HttpGet("all")]
+    public async Task<IActionResult> GetAllOrders([FromQuery] SearchParamDto searchParams)
+    {
+        if (searchParams.PageNumber < 1) searchParams.PageNumber = 1;
+        if (searchParams.PageSize < 1) searchParams.PageSize = 20;
+
+        var pagedResult = await _orderService.GetAllOrdersAsync(searchParams);
+        return Ok(pagedResult);
+    }
   }
 }

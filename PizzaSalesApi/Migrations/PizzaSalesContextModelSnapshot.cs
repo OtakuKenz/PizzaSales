@@ -29,7 +29,7 @@ namespace PizzaSalesApi.Migrations
 
                     b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSalesApi.Models.Entities.Ingredient", b =>
@@ -44,7 +44,7 @@ namespace PizzaSalesApi.Migrations
 
                     b.HasKey("IngredientId");
 
-                    b.ToTable("Ingredients");
+                    b.ToTable("Ingredients", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSalesApi.Models.Entities.Order", b =>
@@ -62,7 +62,7 @@ namespace PizzaSalesApi.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSalesApi.Models.Entities.OrderDetail", b =>
@@ -90,7 +90,7 @@ namespace PizzaSalesApi.Migrations
 
                     b.HasIndex("PizzaId");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderDetails", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSalesApi.Models.Entities.Pizza", b =>
@@ -115,7 +115,7 @@ namespace PizzaSalesApi.Migrations
 
                     b.HasIndex("PizzaTypeId");
 
-                    b.ToTable("Pizzas");
+                    b.ToTable("Pizzas", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSalesApi.Models.Entities.PizzaType", b =>
@@ -130,7 +130,7 @@ namespace PizzaSalesApi.Migrations
 
                     b.HasKey("PizzaTypeId");
 
-                    b.ToTable("PizzaTypes");
+                    b.ToTable("PizzaTypes", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSalesApi.Models.Entities.PizzaTypeCategory", b =>
@@ -152,7 +152,7 @@ namespace PizzaSalesApi.Migrations
 
                     b.HasIndex("PizzaTypeId");
 
-                    b.ToTable("PizzaTypeCategories");
+                    b.ToTable("PizzaTypeCategories", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSalesApi.Models.Entities.PizzaTypeIngredient", b =>
@@ -174,7 +174,7 @@ namespace PizzaSalesApi.Migrations
 
                     b.HasIndex("PizzaTypeId");
 
-                    b.ToTable("PizzaTypeIngredients");
+                    b.ToTable("PizzaTypeIngredients", (string)null);
                 });
 
             modelBuilder.Entity("PizzaSalesApi.Models.Entities.OrderDetail", b =>

@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
+using Microsoft.EntityFrameworkCore;
 using PizzaSalesApi.Models.DTOs;
 using PizzaSalesApi.Models.Entities;
 
@@ -10,6 +11,51 @@ namespace PizzaSalesApi.Services
   public class OrderDetailsService(PizzaSalesContext context) : IOrderDetailsService
   {
     private readonly PizzaSalesContext _context = context;
+
+    public async Task<OrderDetailDto> GetOrderDetailsAsync(int orderId)
+    {
+        var order = await _context.Orders
+            .Where(o => o.OrderId == orderId)
+            .Include(o => o.OrderDetails)
+                .ThenInclude(od => od.Pizza)
+                    .ThenInclude(p => p.PizzaType)
+                        .ThenInclude(pt => pt.PizzaTypeIngredients)
+                            .ThenInclude(pti => pti.Ingredient)
+            .FirstOrDefaultAsync();
+
+        if (order == null)
+            throw new ArgumentException($"Order with ID {orderId} does not exist.");
+
+        var pizzas = order.OrderDetails.Select(od =>
+        {
+            var pizzaType = od.Pizza?.PizzaType;
+            var ingredients = pizzaType?.PizzaTypeIngredients?
+                .Select(pti => pti.Ingredient?.Name ?? string.Empty)
+                .ToList() ?? new List<string>();
+
+            return new PizzaDto
+            {
+                Pizza = pizzaType?.Name ?? string.Empty,
+                Price = od.Pizza?.Price ?? 0,
+                Quantity = od.Quantity,
+                Size = od.Pizza?.Size ?? string.Empty,
+                Subtotal = od.Quantity * (od.Pizza?.Price ?? 0),
+                Ingredients = ingredients
+            };
+        }).ToList();
+
+        return new OrderDetailDto
+        {
+            OrderSummary = new OrderSummaryDto
+            {
+                OrderId = order.OrderId,
+                Date = order.Date,
+                Time = order.Time,
+                OrderTotal = order.OrderDetails.Sum(od => od.Quantity * (od.Pizza?.Price ?? 0))
+            },
+            Pizzas = pizzas
+        };
+    }
 
     public async Task<ImportResultDto> ImportAsync(ImportRequest request)
     {
@@ -33,8 +79,8 @@ namespace PizzaSalesApi.Services
       // Ensure EF does not try to insert/update foreign key references
       foreach (var orderDetail in newOrderDetails)
       {
-        orderDetail.Order = null;
-        orderDetail.Pizza = null;
+        orderDetail.Order = new();
+        orderDetail.Pizza = new();
       }
 
       int inserted = newOrderDetails.Count;

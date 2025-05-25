@@ -1,0 +1,52 @@
+<div class="container my-4" *ngIf="orderDetail">
+  <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0">Order #{{ orderDetail.orderSummary.orderId }}</h5>
+    </div>
+    <div class="card-body">
+      <div class="row mb-2">
+        <div class="col-md-4"><strong>Date:</strong> {{ orderDetail.orderSummary.date | date:'MM/dd/yyyy' }}</div>
+        <div class="col-md-4"><strong>Time:</strong> {{ orderDetail.orderSummary.time }}</div>
+        <div class="col-md-4"><strong>Total:</strong> ${{ orderDetail.orderSummary.orderTotal | number:'1.2-2' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Pizza</th>
+              <th>Ingredients</th>
+              <th>Size</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pizza of orderDetail.pizzas">
+              <td>{{ pizza.pizza }}</td>
+              <td>
+                <ul class="mb-0 ps-3">
+                  <li *ngFor="let ing of pizza.ingredients">{{ ing }}</li>
+                </ul>
+              </td>
+              <td>{{ pizza.size }}</td>
+              <td>${{ pizza.price | number:'1.2-2' }}</td>
+              <td>{{ pizza.quantity }}</td>
+              <td>${{ pizza.subtotal | number:'1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loading or not found states -->
+<div class="container my-4" *ngIf="!orderDetail">
+  <div class="alert alert-info">Loading order details...</div>
+</div>

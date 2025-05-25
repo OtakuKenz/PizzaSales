@@ -1,0 +1,71 @@
+<div class="table-responsive overflow-auto">
+  <table class="table table-hover align-middle">
+    <thead>
+      <tr>
+        <th *ngFor="let col of columns" (click)="onSort(col)" [class.text-primary]="col.sortable">
+          {{ col.header }}
+          <span *ngIf="col.sortable">
+            <i *ngIf="sortField === col.field && sortDirection === 'asc'" class="bi bi-caret-up-fill"></i>
+            <i *ngIf="sortField === col.field && sortDirection === 'desc'" class="bi bi-caret-down-fill"></i>
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="loading">
+        <td [attr.colspan]="columns.length" class="text-center">Loading...</td>
+      </tr>
+      <ng-container *ngIf="!loading">
+        <tr *ngFor="let row of data">
+          <td *ngFor="let col of columns">
+            <ng-container *ngIf="col.link; else plainCell">
+              <a [routerLink]="row.href">{{ row[col.field] }}</a>
+            </ng-container>
+            <ng-template #plainCell>
+              {{ row[col.field] }}
+            </ng-template>
+          </td>
+        </tr>
+      </ng-container>
+      <tr *ngIf="!loading && (data === undefined || data.length === 0)">
+        <td [attr.colspan]="columns.length" class="text-center">No data found.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Pagination -->
+<nav *ngIf="totalPages > 1">
+  <ul class="pagination justify-content-end">
+    <li class="page-item" [class.disabled]="page === 1">
+      <button type="button" class="page-link" (click)="onPageChange(page - 1)" [disabled]="page === 1">&laquo;</button>
+    </li>
+    <!-- First page -->
+    <li class="page-item" [class.active]="page === 1">
+      <button type="button" class="page-link" (click)="onPageChange(1)">1</button>
+    </li>
+    <!-- Ellipsis before current range -->
+    <li class="page-item disabled" *ngIf="page > 4">
+      <span class="page-link">...</span>
+    </li>
+    <!-- Pages around current -->
+    <ng-container *ngFor="let p of pages">
+      <li class="page-item" *ngIf="p !== 1 && p !== totalPages && p >= page - 2 && p <= page + 2"
+        [class.active]="p === page">
+        <button type="button" class="page-link" (click)="onPageChange(p)">{{ p }}</button>
+      </li>
+    </ng-container>
+    <!-- Ellipsis after current range -->
+    <li class="page-item disabled" *ngIf="page < totalPages - 3">
+      <span class="page-link">...</span>
+    </li>
+    <!-- Last page (if more than one page) -->
+    <li class="page-item" *ngIf="totalPages > 1" [class.active]="page === totalPages">
+      <button type="button" class="page-link" (click)="onPageChange(totalPages)">{{ totalPages }}</button>
+    </li>
+    <li class="page-item" [class.disabled]="page === totalPages">
+      <button type="button" class="page-link" (click)="onPageChange(page + 1)"
+        [disabled]="page === totalPages">&raquo;</button>
+    </li>
+  </ul>
+</nav>

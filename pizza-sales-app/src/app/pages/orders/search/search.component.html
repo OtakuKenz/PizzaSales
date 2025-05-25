@@ -1,0 +1,42 @@
+<h1>Orders</h1>
+
+<div class="container-fluid mt-5">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="row g-3 align-items-end">
+    <div class="row">
+      <div class="col-md-4 col-lg-3 col-xl-2 col-sm-6">
+        <label for="from" class="form-label">From</label>
+        <input type="date" class="form-control" id="from"  formControlName="from">
+      </div>
+      <div class="col-md-4 col-lg-3 col-xl-2 col-sm-6">
+        <label for="to" class="form-label">To</label>
+        <input type="date" class="form-control" id="to" formControlName="to">
+      </div>
+      <div class="col-md-4 col-lg-3 col-xl-2 col-sm-6">
+        <label for="orderNumber" class="form-label">Order Number</label>
+        <input type="text" class="form-control" id="orderNumber" formControlName="orderNumber"
+          placeholder="(wildcard search)">
+      </div>
+      <div class="col-md-4 col-lg-3 col-xl-2 col-sm-6">
+        <label for="pageSize" class="form-label">Results per page</label>
+        <input type="number"
+          [ngStyle]="{'border-color': form.get('pageSize')?.invalid && form.get('pageSize')?.touched ? 'red' : ''}"
+          class="form-control" id="pageSize" formControlName="pageSize" min="10" max="50" required>
+        <div class="invalid-feedback"
+          [ngStyle]="{'display': form.get('pageSize')?.invalid && form.get('pageSize')?.touched ? 'block' : 'none'}">
+          Please enter a valid page size between 10 and 50.
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-auto">
+        <button type="submit" class="btn btn-primary w-100">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="container-fluid">
+  <app-datatable [columns]="columns" [data]="orders" [totalRecords]="totalOrders" [page]="orderSearch.pageNumber || 1"
+    [pageSize]="orderSearch.pageSize || 10" [loading]="loading" (pageChange)="onPageChange($event)"
+    (sortChange)="onSortChange($event)">
+  </app-datatable>
+</div>
